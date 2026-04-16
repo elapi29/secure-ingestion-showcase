@@ -2,31 +2,29 @@
 
 Secure ingestion architecture for sensitive metadata before downstream AI, analytics, or clinical tool pipelines.
 
-This public repository is a **showcase repo**.
+This repository is a public showcase.
 
 It exists to communicate:
 - architecture
-- product direction
 - security model
 - demo flow
-- screenshots and media
-- commercial positioning
+- screenshots
+- product direction
 
-It does **not** contain the private product core.
+It does not contain the private product core.
 
 ## What the platform does
 
-The platform is designed to create a controlled handoff layer before sensitive metadata enters downstream systems.
+The platform creates a controlled ingress layer before sensitive metadata enters downstream systems.
 
-Core concepts:
-- protect metadata before handoff
-- verify and validate before downstream use
-- enforce tenant-aware policy
+Core ideas:
+- protect before handoff
+- verify before downstream use
+- validate schema and policy
 - persist Bronze and audit evidence
-- secure gateway-to-backend forwarding
-- support hardened service-to-service transport
+- control release to downstream AI / analytics / clinical tools
 
-## Security concepts showcased
+## Security capabilities showcased
 
 - secure package ingest
 - schema validation
@@ -35,51 +33,37 @@ Core concepts:
 - signed gateway forwarding
 - replay protection
 - mTLS-ready service-to-service boundary
-- PQC gateway transport track
-
-## Intended commercial directions
-
-- managed secure-ingestion SaaS
-- enterprise deployment package
-- architecture + integration engagements
-- regulated data handoff hardening
-- healthtech / clinical AI ingress control point
+- PQC transport hardening track
 
 ## Public / private split
-
-This repo is public on purpose.
 
 Public:
 - diagrams
 - screenshots
-- videos
-- high-level documentation
+- positioning
 - redacted samples
-- product positioning
+- demo narrative
 
 Private:
 - control plane
-- billing / metering
 - tenant administration
+- billing / metering
 - certificate lifecycle
 - policy packs
-- operational tooling
-- observability stack
+- observability
 - deployment automation
-- customer-specific integrations
+- customer integrations
 
-## Demo assets
+## Commercial direction
 
-See:
-- `docs/security-model.md`
-- `docs/product-positioning.md`
-- `docs/roadmap.md`
-- `docs/demo-script.md`
+This work is intended to evolve into:
+- managed secure-ingestion SaaS
+- enterprise deployment package
+- architecture + integration engagements
+- regulated data handoff hardening
 
-## Contact / next step
+## Contents
 
-This project is intended for:
-- CTO conversations
-- architecture reviews
-- pilot discussions
-- secure-ingestion design engagements
+- `docs/` — diagrams and screenshots
+- `samples/` — redacted sample payload
+- `media/` — optional demo video and visual assets
