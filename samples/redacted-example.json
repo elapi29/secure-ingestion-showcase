@@ -1,0 +1,6 @@
+{
+  "manufacturer": "Acme",
+  "modality": "ECG",
+  "multiplex_count": 1,
+  "multiplexes": []
+}
