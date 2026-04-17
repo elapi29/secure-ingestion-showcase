@@ -15,8 +15,6 @@ It exists to communicate:
 
 It does **not** contain the private product core.
 
-![Architecture overview](docs/architecture-overview-v2.jpeg)
-
 ## What the platform does
 
 The platform creates a controlled ingress layer before sensitive metadata enters downstream systems.
@@ -28,6 +26,10 @@ Core ideas:
 - validate schema and policy
 - persist Bronze and audit evidence
 - control release to downstream AI, analytics, or clinical tools
+
+## Architecture overview
+
+![Architecture overview](docs/architecture-overview-v2.jpeg)
 
 ## Security capabilities showcased
 
@@ -43,7 +45,31 @@ This showcase reflects the current secure-ingestion baseline:
 - PQC transport hardening track
 - live metering into a private platform layer
 
-![Secure ingestion UI](docs/ui-secure-ingestion.png)
+## Illustrative control-plane UI
+
+The implementation is private. This UI is an illustrative control-plane concept for the private platform layer.
+
+![Secure ingestion UI concept](docs/ui-secure-ingestion.png)
+
+## Bronze / audit model
+
+The ingress path separates normalized operational storage from audit evidence.
+
+![Bronze and audit flow](docs/bronze-flow.png)
+
+## Representative evidence screenshots
+
+### Accepted secure package response
+
+![Accepted response](docs/screenshots/accepted-response.png)
+
+### Bronze output example
+
+![Bronze output](docs/screenshots/bronze-output.png)
+
+### Audit output example
+
+![Audit output](docs/screenshots/audit-output.png)
 
 ## Public / private split
 
@@ -69,12 +95,6 @@ The private implementation continues separately and includes:
 - observability
 - deployment automation
 - customer integrations
-
-## Bronze / audit model
-
-The ingress path separates normalized operational storage from audit evidence.
-
-![Bronze and audit flow](docs/bronze-flow.png)
 
 ## Current maturity
 
