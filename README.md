@@ -35,7 +35,7 @@ Core ideas:
 
 ## Security capabilities showcased
 
-This showcase reflects the current secure-ingestion baseline:
+This showcase reflects the current secure-ingestion foundation:
 
 - secure package ingest
 - schema validation
@@ -98,9 +98,9 @@ The private implementation continues separately and includes:
 - deployment automation
 - customer integrations
 
-## Current maturity
+## Current state
 
-This is a **production-ready secure ingestion foundation**, not a finished managed SaaS.
+This showcase reflects a **production-ready secure ingestion foundation**, with the managed SaaS layer evolving privately.
 
 What is already demonstrated:
 
@@ -111,7 +111,7 @@ What is already demonstrated:
 - Bronze / audit write model
 - live metering into a private platform foundation
 
-What remains private and productized separately:
+What continues privately:
 
 - tenant management
 - hosted control plane
