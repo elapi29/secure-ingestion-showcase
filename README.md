@@ -2,29 +2,36 @@
 
 Secure ingestion architecture for sensitive metadata before downstream AI, analytics, or clinical tool pipelines.
 
-This repository is a public showcase.
+This repository is a **public showcase**.
 
 It exists to communicate:
-- architecture
-- security model
-- demo flow
-- screenshots
-- product direction
 
-It does not contain the private product core.
+- the problem being solved
+- the high-level architecture
+- the security model
+- the demo flow
+- representative visuals
+- the product direction
+
+It does **not** contain the private product core.
+
+![Architecture overview](docs/architecture-overview-v2.jpeg)
 
 ## What the platform does
 
 The platform creates a controlled ingress layer before sensitive metadata enters downstream systems.
 
 Core ideas:
+
 - protect before handoff
 - verify before downstream use
 - validate schema and policy
 - persist Bronze and audit evidence
-- control release to downstream AI / analytics / clinical tools
+- control release to downstream AI, analytics, or clinical tools
 
 ## Security capabilities showcased
+
+This showcase reflects the current secure-ingestion baseline:
 
 - secure package ingest
 - schema validation
@@ -32,19 +39,28 @@ Core ideas:
 - Bronze / audit separation
 - signed gateway forwarding
 - replay protection
-- mTLS-ready service-to-service boundary
+- mTLS ingress
 - PQC transport hardening track
+- live metering into a private platform layer
+
+![Secure ingestion UI](docs/ui-secure-ingestion.png)
 
 ## Public / private split
 
-Public:
+### Public
+
+This repository contains:
+
 - diagrams
 - screenshots
 - positioning
 - redacted samples
 - demo narrative
 
-Private:
+### Private
+
+The private implementation continues separately and includes:
+
 - control plane
 - tenant administration
 - billing / metering
@@ -54,16 +70,52 @@ Private:
 - deployment automation
 - customer integrations
 
+## Bronze / audit model
+
+The ingress path separates normalized operational storage from audit evidence.
+
+![Bronze and audit flow](docs/bronze-flow.png)
+
+## Current maturity
+
+This is a **secure ingestion baseline**, not a finished production SaaS.
+
+What is already demonstrated:
+
+- signed gateway auth
+- replay protection
+- PQC transport track
+- mTLS-secured ingress
+- Bronze / audit write model
+- live metering into a private platform foundation
+
+What remains private and productized separately:
+
+- tenant management
+- hosted control plane
+- billing operations
+- dashboarding
+- managed certificate lifecycle
+- enterprise onboarding
+- operational tooling
+
 ## Commercial direction
 
 This work is intended to evolve into:
+
 - managed secure-ingestion SaaS
 - enterprise deployment package
 - architecture + integration engagements
 - regulated data handoff hardening
 
+## Private evaluation
+
+Implementation is kept private.
+
+Enterprise / private evaluation is available on request.
+
 ## Contents
 
-- `docs/` — diagrams and screenshots
+- `docs/` — diagrams, screenshots, security model, roadmap
 - `samples/` — redacted sample payload
 - `media/` — optional demo video and visual assets
