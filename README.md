@@ -1,5 +1,7 @@
 # Secure Ingestion Showcase
 
+**Production-ready secure ingestion foundation, with the managed SaaS layer evolving privately.**
+
 Secure ingestion architecture for sensitive metadata before downstream AI, analytics, or clinical tool pipelines.
 
 This repository is a **public showcase**.
@@ -98,7 +100,7 @@ The private implementation continues separately and includes:
 
 ## Current maturity
 
-This is a **secure ingestion baseline**, not a finished production SaaS.
+This is a **production-ready secure ingestion foundation**, not a finished managed SaaS.
 
 What is already demonstrated:
 
