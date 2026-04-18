@@ -1,9 +1,732 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  ...
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Secure Ingestion Platform — Showcase UI</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --muted-2: #94a3b8;
+      --border: #dbe3ef;
+      --blue: #185fa5;
+      --blue-soft: #e6f1fb;
+      --green: #3b6d11;
+      --green-soft: #eaf3de;
+      --amber: #633806;
+      --amber-soft: #faeeda;
+      --red: #791f1f;
+      --red-soft: #fcebeb;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --radius: 12px;
+      --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .dash {
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .topbar {
+      background: var(--surface);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-brand {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .topbar-env {
+      font-size: 11px;
+      background: var(--blue-soft);
+      color: #0c447c;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-transform: lowercase;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .topbar-divider {
+      color: var(--border);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 2px;
+      padding: 0 24px;
+      background: var(--surface);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .tab {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 11px 14px;
+      cursor: default;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab.active {
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+      font-weight: 600;
+    }
+
+    .main {
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .kpi {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .kpi-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.05;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .kpi-up {
+      color: var(--green);
+    }
+
+    .kpi-dn {
+      color: #a32d2d;
+    }
+
+    .section-card,
+    .side-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .section-hd,
+    .side-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .section-hd-title,
+    .side-hd span:first-child {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .section-hd-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-blue {
+      background: var(--blue-soft);
+      color: #0c447c;
+    }
+
+    .badge-green {
+      background: var(--green-soft);
+      color: #27500a;
+    }
+
+    .badge-amber {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .badge-gray {
+      background: var(--surface-alt);
+      color: var(--muted);
+    }
+
+    .badge-red {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 16px;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .search-input {
+      flex: 1;
+      font-size: 12px;
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 10px;
+      background: var(--surface-alt);
+      color: var(--text);
+      outline: none;
+    }
+
+    .filter-btn {
+      font-size: 11px;
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      background: transparent;
+      color: var(--muted);
+      cursor: default;
+    }
+
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .tbl th {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      text-align: left;
+      padding: 8px 16px;
+      border-bottom: 0.5px solid var(--border);
+      background: var(--surface-alt);
+    }
+
+    .tbl td {
+      font-size: 12px;
+      color: var(--text);
+      padding: 10px 16px;
+      border-bottom: 0.5px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .tbl tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tenant-name {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    .tenant-id {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-family: var(--font-mono);
+    }
+
+    .prog-wrap {
+      background: #eef3f9;
+      border-radius: 999px;
+      height: 6px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .prog-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: #378add;
+    }
+
+    .prog-bar.warn {
+      background: #ef9f27;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .side-body {
+      padding: 12px 14px;
+    }
+
+    .inv-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      padding: 4px 0;
+    }
+
+    .inv-row span:last-child {
+      color: var(--text);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .inv-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 0 2px;
+      border-top: 0.5px solid var(--border);
+      margin-top: 4px;
+    }
+
+    .inv-total span:last-child {
+      color: var(--blue);
+    }
+
+    .quota-item {
+      margin-bottom: 10px;
+    }
+
+    .quota-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .quota-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .quota-label span:last-child {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 60px;
+      padding-top: 4px;
+    }
+
+    .bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      background: #b5d4f4;
+      min-width: 0;
+    }
+
+    .bar.hi {
+      background: #378add;
+    }
+
+    .chart-x {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .chart-x span {
+      flex: 1;
+      font-size: 9px;
+      color: var(--muted-2);
+      text-align: center;
+    }
+
+    .table-footer {
+      padding: 9px 16px;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .table-footer a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1100px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .right-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  ...
+  <div class="dash">
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-brand">Secure Ingestion Platform</span>
+        <span class="topbar-env">showcase</span>
+      </div>
+
+      <div class="topbar-right">
+        <span>Illustrative control-plane UI concept</span>
+        <span class="topbar-divider">|</span>
+        <span>May 2025</span>
+        <span class="topbar-divider">|</span>
+        <span style="color:#185fa5;font-weight:600;">Private platform layer</span>
+      </div>
+    </div>
+
+    <div class="nav-tabs">
+      <div class="tab active">Overview</div>
+      <div class="tab">Tenants</div>
+      <div class="tab">Policies</div>
+      <div class="tab">Audit log</div>
+      <div class="tab">Billing</div>
+    </div>
+
+    <div class="main">
+      <div class="left">
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Requests processed</div>
+            <div class="kpi-val">2.41M</div>
+            <div class="kpi-sub kpi-up">↑ 12% vs last month</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label">Accepted</div>
+            <div class="kpi-val">2.38M</div>
+            <div class="kpi-sub">98.7% acceptance rate</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label">Rejected</div>
+            <div class="kpi-val">31,204</div>
+            <div class="kpi-sub kpi-dn">↑ 4.1% vs last month</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label">mTLS traffic</div>
+            <div class="kpi-val">94.2%</div>
+            <div class="kpi-sub kpi-up">↑ 1.3 pp</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label">PQC traffic</div>
+            <div class="kpi-val">61.8%</div>
+            <div class="kpi-sub kpi-up">↑ 8.4 pp</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-hd">
+            <span class="section-hd-title">Tenants</span>
+            <div class="section-hd-right">
+              <span class="badge badge-blue">6 active</span>
+              <span class="badge badge-amber">1 trial</span>
+            </div>
+          </div>
+
+          <div class="search-row">
+            <input class="search-input" type="text" readonly placeholder="Search tenants..." />
+            <button class="filter-btn">Plan ▾</button>
+            <button class="filter-btn">Status ▾</button>
+          </div>
+
+          <table class="tbl">
+            <colgroup>
+              <col style="width:22%">
+              <col style="width:13%">
+              <col style="width:20%">
+              <col style="width:12%">
+              <col style="width:33%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Tenant</th>
+                <th>Plan</th>
+                <th>Policy pack</th>
+                <th>Status</th>
+                <th>Monthly usage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="tenant-name">demo-clinic</div>
+                  <div class="tenant-id">ten_4a8f2c</div>
+                </td>
+                <td><span class="badge badge-gray">Pilot</span></td>
+                <td style="font-size:11px;color:#64748b;">hipaa-baseline-v2</td>
+                <td><span class="badge badge-green">Active</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="flex:1;">
+                      <div class="prog-wrap">
+                        <div class="prog-bar" style="width:34%;"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:11px;color:#64748b;min-width:64px;">84,210 req</span>
+                  </div>
+                  <div style="font-size:10px;color:#64748b;margin-top:3px;">1.2 GB · $0.00</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="tenant-name">hospital-growth</div>
+                  <div class="tenant-id">ten_9c1d7e</div>
+                </td>
+                <td><span class="badge badge-blue">Growth</span></td>
+                <td style="font-size:11px;color:#64748b;">hipaa-strict-v3</td>
+                <td><span class="badge badge-green">Active</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="flex:1;">
+                      <div class="prog-wrap">
+                        <div class="prog-bar warn" style="width:78%;"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:11px;color:#64748b;min-width:64px;">781,440 req</span>
+                  </div>
+                  <div style="font-size:10px;color:#64748b;margin-top:3px;">18.4 GB · $1,248.00</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="tenant-name">metro-imaging</div>
+                  <div class="tenant-id">ten_b3e509</div>
+                </td>
+                <td><span class="badge badge-blue">Growth</span></td>
+                <td style="font-size:11px;color:#64748b;">dicom-pqc-v1</td>
+                <td><span class="badge badge-green">Active</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="flex:1;">
+                      <div class="prog-wrap">
+                        <div class="prog-bar" style="width:55%;"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:11px;color:#64748b;min-width:64px;">540,020 req</span>
+                  </div>
+                  <div style="font-size:10px;color:#64748b;margin-top:3px;">9.1 GB · $892.00</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="tenant-name">pharma-dx</div>
+                  <div class="tenant-id">ten_2f6a11</div>
+                </td>
+                <td><span class="badge badge-gray">Pilot</span></td>
+                <td style="font-size:11px;color:#64748b;">fda-21cfr11-v1</td>
+                <td><span class="badge badge-amber">Trial</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="flex:1;">
+                      <div class="prog-wrap">
+                        <div class="prog-bar" style="width:18%;"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:11px;color:#64748b;min-width:64px;">22,880 req</span>
+                  </div>
+                  <div style="font-size:10px;color:#64748b;margin-top:3px;">380 MB · $0.00</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="tenant-name">regional-lab</div>
+                  <div class="tenant-id">ten_7d0c3b</div>
+                </td>
+                <td><span class="badge badge-blue">Growth</span></td>
+                <td style="font-size:11px;color:#64748b;">hipaa-baseline-v2</td>
+                <td><span class="badge badge-green">Active</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="flex:1;">
+                      <div class="prog-wrap">
+                        <div class="prog-bar" style="width:42%;"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:11px;color:#64748b;min-width:64px;">310,500 req</span>
+                  </div>
+                  <div style="font-size:10px;color:#64748b;margin-top:3px;">6.7 GB · $544.00</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <span>Showing 5 of 7 tenants</span>
+            <a href="#">View all →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="side-card">
+          <div class="side-hd">
+            <span>Invoice preview</span>
+            <span class="badge badge-blue">May 2025</span>
+          </div>
+          <div class="side-body">
+            <div class="inv-row"><span>hospital-growth</span><span>$1,248.00</span></div>
+            <div class="inv-row"><span>metro-imaging</span><span>$892.00</span></div>
+            <div class="inv-row"><span>regional-lab</span><span>$544.00</span></div>
+            <div class="inv-row"><span>demo-clinic</span><span>$0.00</span></div>
+            <div class="inv-row"><span>pharma-dx</span><span>$0.00</span></div>
+            <div class="inv-row" style="margin-top:4px;padding-top:4px;border-top:0.5px solid #dbe3ef;">
+              <span>Platform fee</span><span>$300.00</span>
+            </div>
+            <div class="inv-total">
+              <span>Total due</span>
+              <span>$2,984.00</span>
+            </div>
+            <div style="margin-top:10px;font-size:10px;color:#64748b;">Due Jun 1, 2025 · Net 30</div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <div class="side-hd">
+            <span>Quota status</span>
+          </div>
+          <div class="side-body">
+            <div class="quota-item">
+              <div class="quota-label"><span>Total requests</span><span>2.41M / 5M</span></div>
+              <div class="prog-wrap"><div class="prog-bar" style="width:48%;"></div></div>
+            </div>
+            <div class="quota-item">
+              <div class="quota-label"><span>Data ingested</span><span>36.1 / 100 GB</span></div>
+              <div class="prog-wrap"><div class="prog-bar" style="width:36%;"></div></div>
+            </div>
+            <div class="quota-item">
+              <div class="quota-label"><span>Active tenants</span><span>7 / 20</span></div>
+              <div class="prog-wrap"><div class="prog-bar" style="width:35%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <div class="side-hd">
+            <span>Usage overview</span>
+            <span style="font-size:10px;color:#64748b;">Last 8 weeks</span>
+          </div>
+          <div class="side-body">
+            <div class="chart-bars">
+              <div class="bar" style="height:30%;"></div>
+              <div class="bar" style="height:42%;"></div>
+              <div class="bar" style="height:38%;"></div>
+              <div class="bar" style="height:55%;"></div>
+              <div class="bar" style="height:62%;"></div>
+              <div class="bar" style="height:70%;"></div>
+              <div class="bar" style="height:84%;"></div>
+              <div class="bar hi" style="height:100%;"></div>
+            </div>
+            <div class="chart-x">
+              <span>W18</span>
+              <span>W19</span>
+              <span>W20</span>
+              <span>W21</span>
+              <span>W22</span>
+              <span>W23</span>
+              <span>W24</span>
+              <span>W25</span>
+            </div>
+            <div style="margin-top:10px;font-size:11px;color:#64748b;display:flex;justify-content:space-between;">
+              <span>Peak: 480K req/wk</span>
+              <span style="color:#3b6d11;">↑ 31% WoW</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
