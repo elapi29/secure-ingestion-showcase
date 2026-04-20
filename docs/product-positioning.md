@@ -12,7 +12,7 @@ It is designed to help teams verify provenance, enforce policy, persist evidence
 
 ## What buyers should understand
 
-This is not being positioned as “just a crypto demo” or “just a gateway”.
+This is not being positioned as just a crypto demo or just a gateway.
 
 The value is in the combination of:
 

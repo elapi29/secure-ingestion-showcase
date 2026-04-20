@@ -2,25 +2,21 @@
 
 ## Goal
 
-Communicate a validated secure-ingestion baseline before downstream AI / analytics / clinical workflow use.
+Communicate a validated secure-ingestion baseline before downstream AI, analytics, or clinical workflow use.
 
 ## Open with
 
 “This showcase demonstrates a secure ingress layer for sensitive clinical metadata. The goal is to verify, validate, record, and control release before downstream AI or analytics systems receive anything.”
 
-## Step 1 — Architecture overview
+## Step 1 — Open the README hero
 
-Show:
-
-- `docs/architecture-overview.png`
-- optionally `docs/architecture-overview-v2.jpeg`
+Show the README opening section.
 
 Talk track:
 
-- metadata is protected before handoff
-- secure backend ingest verifies and validates before release
-- downstream use is controlled, not implicit
-- the platform is about trusted ingress, not just transport
+- this is a public showcase, not the private managed platform
+- the claim is a validated secure-ingestion baseline
+- the problem is controlled handoff before downstream AI or analytics use
 
 ## Step 2 — Bronze and audit model
 
@@ -33,9 +29,9 @@ Talk track:
 - accepted metadata becomes a Bronze record
 - evidence and release trace are persisted separately in Audit
 - this creates a cleaner boundary between operational ingest and downstream usage evidence
-- tenant-aware policy can decide whether release is allowed
+- tenant-aware policy can decide whether release is allowed before downstream use
 
-## Step 3 — Validated response
+## Step 3 — Accepted response
 
 Show:
 
@@ -43,24 +39,35 @@ Show:
 
 Talk track:
 
-- accepted response demonstrates signature validity, schema validity, policy allow decision, and generated Bronze / Audit paths
-- this is not a placeholder mock; it reflects validated demo output
-- the platform is evaluating before release, not after the fact
+- the accepted response demonstrates signature validity, schema validity, policy allow decision, and generated Bronze / Audit paths
+- this is validated demo output, not a placeholder mock
+- the platform evaluates before release, not after the fact
 
-## Step 4 — Evidence outputs
+## Step 4 — Bronze evidence
 
 Show:
 
 - `docs/screenshots/bronze-output.png`
-- `docs/screenshots/audit-output.png`
 
 Talk track:
 
 - Bronze stores the accepted normalized metadata record
-- Audit stores evidence of what happened and why
-- this separation matters when downstream AI or analytics use must be explainable
+- this is the controlled data handoff artifact
+- the point is not just acceptance, but structured accepted release
 
-## Step 5 — Managed platform direction
+## Step 5 — Audit evidence
+
+Show:
+
+- `docs/screenshots/audit-output.png`
+
+Talk track:
+
+- Audit stores traceable evidence of what happened and why
+- this matters when downstream AI or analytics use must be explainable
+- Bronze and Audit are intentionally separated
+
+## Step 6 — Managed platform direction
 
 Show:
 
@@ -69,7 +76,7 @@ Show:
 Talk track:
 
 - the control-plane layer is being developed privately
-- this is the direction for tenant operations, usage visibility, policy management, and invoice preview
+- this image shows the intended direction for tenant operations, usage visibility, policy management, and invoice preview
 - the public repository demonstrates architecture and validated baseline behavior
 - the operational platform layer is where commercial managed value grows
 

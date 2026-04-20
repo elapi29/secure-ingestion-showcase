@@ -3,15 +3,15 @@
 Validated secure-ingestion baseline for sensitive clinical metadata before downstream AI, analytics, or clinical workflow systems.
 
 This repository is a **public showcase**.  
-It exists to communicate the architecture, security model, validated demo flow, and product direction.
+It exists to communicate the security model, validated demo flow, screenshots, and product direction.
 
 **The managed platform layer continues privately.**
 
-![Architecture overview](docs/architecture-overview.png)
+![Bronze and audit flow](docs/bronze-flow.png)
 
 ## Core claim
 
-This showcase demonstrates a secure release gate for sensitive metadata before downstream AI or analytics use.
+This showcase demonstrates a secure release gate for sensitive metadata before downstream AI, analytics, or clinical workflow use.
 
 Validated capabilities shown here include:
 
@@ -49,34 +49,31 @@ This showcase reflects a validated baseline demonstrating:
 7. Bronze and Audit persistence
 8. metering emission into a private platform foundation
 
-## Architecture
-
-The platform is designed as a controlled ingress layer between metadata producers and downstream AI / analytics / clinical systems.
-
-![Secure ingestion architecture](docs/architecture-overview-v2.jpeg)
-
 ## Bronze and audit model
 
 The ingest pipeline separates accepted metadata release from evidence and traceability.
 
-![Bronze and audit flow](docs/bronze-flow.png)
+![Bronze flow](docs/bronze-flow.png)
 
-## Illustrative platform-layer UI concept
+## Illustrative private platform direction
 
-The managed platform layer is being developed privately. The image below is an illustrative control-plane concept showing the direction for usage visibility, tenant operations, and invoice preview.
+The managed platform layer is being developed privately. The image below is an illustrative control-plane concept showing the direction for tenant operations, policy visibility, usage tracking, and invoice preview.
 
 ![Illustrative control-plane concept](docs/ui-secure-ingestion.png)
 
-## Validation snapshot
+## Validation snapshots
 
-Example accepted-response output from the validated demo flow:
+Example accepted-response output from the validated flow:
 
-![Accepted response snapshot](docs/screenshots/accepted-response.png)
+![Accepted response](docs/screenshots/accepted-response.png)
 
-Additional example outputs:
+Example Bronze output:
 
-- [Bronze output snapshot](docs/screenshots/bronze-output.png)
-- [Audit output snapshot](docs/screenshots/audit-output.png)
+![Bronze output](docs/screenshots/bronze-output.png)
+
+Example Audit output:
+
+![Audit output](docs/screenshots/audit-output.png)
 
 ## Public / private split
 
@@ -84,10 +81,9 @@ Additional example outputs:
 
 This repository contains:
 
-- architecture diagrams
+- diagrams and screenshots
 - security model
-- screenshots
-- redacted samples
+- redacted sample payloads
 - positioning material
 - demo narrative
 
@@ -111,7 +107,7 @@ This showcase represents a **validated and pilot-ready secure-ingestion baseline
 
 It is appropriate for technical evaluation, architecture discussion, and customer-specific deployment planning.
 
-The public showcase does **not** claim that every managed operational layer is included here. The operational platform surface — such as hosted control plane, tenant management, billing operations, lifecycle tooling, and enterprise support workflows — is being developed privately.
+The public showcase does **not** claim that every managed operational layer is included here. The hosted control plane, tenant management, billing operations, lifecycle tooling, and enterprise support workflows are being developed privately.
 
 ## Commercial direction
 
@@ -142,7 +138,7 @@ The private commercial value lives in the managed platform layer:
 
 ## Repository structure
 
-- `docs/` — architecture diagrams, screenshots, and security notes
+- `docs/` — diagrams, screenshots, and security notes
 - `samples/` — redacted sample payloads
 - `media/` — optional visual assets
 - `README.md` — public-facing overview
