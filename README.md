@@ -1,129 +1,117 @@
 # Secure Ingestion Showcase
 
-Secure ingestion architecture for sensitive metadata before downstream AI, analytics, or clinical workflow systems.
+Validated secure-ingestion baseline for sensitive clinical metadata before downstream AI, analytics, or clinical workflow systems.
 
 This repository is a **public showcase**.  
-It exists to communicate the architecture, security model, demo flow, screenshots, and product direction.
+It exists to communicate the architecture, security model, validated demo flow, and product direction.
 
-**The private product core is not included here.**
+**The managed platform layer continues privately.**
 
 ![Architecture overview](docs/architecture-overview.png)
 
-![Bronze flow](docs/bronze-flow.png)
+## Core claim
 
-<!-- Enable this once the final UI screenshot is ready -->
-<!-- ![Control plane UI concept](docs/ui-secure-ingestion.png) -->
+This showcase demonstrates a secure release gate for sensitive metadata before downstream AI or analytics use.
 
-## What problem this solves
+Validated capabilities shown here include:
 
-Organizations working with sensitive clinical or regulated metadata need a controlled ingress layer before information reaches:
-
-- AI systems
-- analytics environments
-- clinical tools
-- downstream data platforms
-
-The goal is to enforce trust, validation, and policy **before handoff**.
-
-## What the platform does
-
-The platform creates a secure release gate for metadata ingestion.
-
-Core ideas:
-
-- protect before handoff
-- verify before downstream use
-- validate schema and policy
-- persist Bronze and audit evidence
-- control release to downstream AI / analytics / clinical tools
-- meter usage for a private platform layer
-
-## Security capabilities showcased
-
-This showcase reflects a validated baseline including:
-
-- secure package ingest
-- schema validation
-- policy validation
-- Bronze / Audit separation
-- signed gateway forwarding
+- signed gateway authentication
 - replay protection
 - PQC transport hardening track
 - mTLS-secured ingress path
+- schema and policy validation before downstream release
+- Bronze / Audit write separation
+- integrated ingest pipeline behavior
 - live metering into a private platform layer
 
-## What is public vs private
+## What problem this solves
+
+Organizations handling sensitive clinical or regulated metadata need more than a raw API endpoint.
+
+They need a controlled ingress layer that can:
+
+- verify provenance before handoff
+- validate schema and policy before downstream use
+- persist Bronze and audit evidence
+- support secure gateway-to-backend forwarding
+- create a path toward managed usage visibility and policy enforcement
+
+## What is validated today
+
+This showcase reflects a validated baseline demonstrating:
+
+1. secure package creation
+2. signed gateway forwarding
+3. replay-aware gateway auth path
+4. PQC transport path
+5. optional mTLS-secured backend ingress
+6. schema and policy checks before downstream release
+7. Bronze and Audit persistence
+8. metering emission into a private platform foundation
+
+## Architecture
+
+The platform is designed as a controlled ingress layer between metadata producers and downstream AI / analytics / clinical systems.
+
+![Secure ingestion architecture](docs/architecture-overview-v2.jpeg)
+
+## Bronze and audit model
+
+The ingest pipeline separates accepted metadata release from evidence and traceability.
+
+![Bronze and audit flow](docs/bronze-flow.png)
+
+## Illustrative platform-layer UI concept
+
+The managed platform layer is being developed privately. The image below is an illustrative control-plane concept showing the direction for usage visibility, tenant operations, and invoice preview.
+
+![Illustrative control-plane concept](docs/ui-secure-ingestion.png)
+
+## Validation snapshot
+
+Example accepted-response output from the validated demo flow:
+
+![Accepted response snapshot](docs/screenshots/accepted-response.png)
+
+Additional example outputs:
+
+- [Bronze output snapshot](docs/screenshots/bronze-output.png)
+- [Audit output snapshot](docs/screenshots/audit-output.png)
+
+## Public / private split
 
 ### Public showcase
 
 This repository contains:
 
 - architecture diagrams
-- screenshots
 - security model
-- product positioning
+- screenshots
 - redacted samples
+- positioning material
 - demo narrative
 
 ### Private platform layer
 
-The following are being developed privately:
+The following continue privately:
 
 - control plane
 - tenant administration
-- billing / metering
-- managed certificate lifecycle
+- billing / metering operations
+- usage visibility
 - policy packs
-- observability
+- managed certificate lifecycle
+- observability and operational tooling
 - deployment automation
 - enterprise integrations
 
-## Validated baseline
-
-The current validated baseline demonstrates:
-
-- signed gateway authentication
-- replay protection
-- PQC gateway transport path
-- mTLS-secured backend ingress
-- Bronze and Audit write paths
-- integrated ingest pipeline behavior
-- live metering emitted into a private control-plane foundation
-
-This is a **baseline demonstration**, not a claim of full production SaaS readiness.
-
 ## Current maturity
 
-### What is real today
+This showcase represents a **validated and pilot-ready secure-ingestion baseline**.
 
-The demonstrated flow validates:
+It is appropriate for technical evaluation, architecture discussion, and customer-specific deployment planning.
 
-1. secure package creation
-2. signed gateway forwarding
-3. PQC transport path
-4. optional mTLS ingress
-5. schema and policy checks before downstream release
-6. Bronze and Audit persistence
-7. metering emission into a private platform layer
-
-### What is not claimed yet
-
-This showcase does **not** claim:
-
-- full hosted multi-tenant control plane
-- enterprise onboarding workflows
-- production billing operations
-- managed certificate lifecycle at scale
-- full observability / incident operations
-- HA / DR completeness
-- formal compliance package completion
-
-## Repository contents
-
-- `docs/` — architecture diagrams, screenshots, and security notes
-- `samples/` — redacted sample payloads
-- `media/` — optional demo assets
-- `README.md` — public-facing overview
+The public showcase does **not** claim that every managed operational layer is included here. The operational platform surface — such as hosted control plane, tenant management, billing operations, lifecycle tooling, and enterprise support workflows — is being developed privately.
 
 ## Commercial direction
 
@@ -131,13 +119,17 @@ This work is intended to evolve toward:
 
 - managed secure-ingestion SaaS
 - enterprise deployment package
-- architecture + integration engagements
 - regulated data handoff hardening
+- architecture + integration engagements
 - healthtech / clinical AI ingress control point
 
 ## Positioning
 
-The commercial value is expected to live primarily in the private platform layer:
+**Secure ingestion layer for sensitive clinical metadata before downstream AI, analytics, or clinical systems.**
+
+The public value here is architecture credibility and validated technical grounding.
+
+The private commercial value lives in the managed platform layer:
 
 - hosted control plane
 - tenant management
@@ -145,13 +137,19 @@ The commercial value is expected to live primarily in the private platform layer
 - usage visibility
 - policy packs
 - certificate lifecycle
-- operational tooling
 - enterprise integrations
 - onboarding and support
 
+## Repository structure
+
+- `docs/` — architecture diagrams, screenshots, and security notes
+- `samples/` — redacted sample payloads
+- `media/` — optional visual assets
+- `README.md` — public-facing overview
+
 ## Evaluation note
 
-Implementation details of the private platform layer are intentionally not published in this repository.
+Implementation details of the managed private platform layer are intentionally not published in this repository.
 
-Private evaluation and architecture discussion can be supported separately.
+Private evaluation, architecture discussion, and deployment scoping can be supported separately.
 
